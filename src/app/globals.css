@@ -19,6 +19,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   height: 100vh;
+  width: 100vw;
   background-image: linear-gradient(to left bottom, #1e2030, #282b3c, #333649, #3e4156, #494d64);
 }
 

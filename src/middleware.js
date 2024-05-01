@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import { isAuthenticated } from "./utils/auth";
 import appEnvVars from "./utils/appEnvVars";
+import { cookies } from "next/headers";
 
 const authMiddleware = async (request) => {
-  const isUserAuthenticated = isAuthenticated(request);
-
-  if (!isUserAuthenticated) {
+  const cookieStore = cookies();
+  if (!cookieStore.has("appSession")) {
     return NextResponse.redirect(appEnvVars.baseUrl);
   }
 

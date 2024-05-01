@@ -1,4 +1,4 @@
-export const isAuthenticated = (request) => {
+export const isAuthenticated = async (request) => {
   const sessionCookieName = "appSession";
-  return request.cookies.has(sessionCookieName);
+  return request.cookies.includes(sessionCookieName);
 };
