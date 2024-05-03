@@ -10,7 +10,11 @@ const useFinAuth = async () => {
     (session) => session?.user?.picture
   );
 
-  return { userProfilePic };
+  const userProfileName = await getUserSession().then(
+    (session) => session?.user?.name
+  );
+
+  return { userProfilePic, userProfileName };
 };
 
 export default useFinAuth;

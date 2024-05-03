@@ -1,11 +1,11 @@
-import { getSession } from "@auth0/nextjs-auth0";
+import useFinAuth from "../../../hooks/useFinAuth";
 
 const SettingsPage = async () => {
-  const session = await getSession();
+  const { userProfileName } = await useFinAuth()
   return (
     <>
     <div>Hello from settings!</div>
-    <p>{JSON.stringify(session?.user.name, null, 2)}</p>
+    <p>{userProfileName }</p>
     </>
   )
 }
