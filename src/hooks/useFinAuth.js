@@ -14,7 +14,7 @@ const useFinAuth = async () => {
     (session) => session?.user?.name
   );
 
-  return { userProfilePic, userProfileName };
+  return { userProfilePic, userProfileName, getUserSession };
 };
 
 export default useFinAuth;

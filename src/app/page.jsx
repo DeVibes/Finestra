@@ -20,7 +20,7 @@ const WelcomePage = () => {
         </div>
         <p className="my-3">A window to your account.</p>
         <FinButton className="w-full h-14">
-          <a href="/api/auth/login">Lets start</a>
+          <a href="/api/login">Lets start</a>
         </FinButton>
       </div>
     </>
