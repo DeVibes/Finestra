@@ -1,11 +1,5 @@
 import { handleCallback, handleLogin } from "@auth0/nextjs-auth0";
-import { redirect } from "next/navigation";
-import { getOrCreateUserAccount } from "../../../db/prismaQueries";
-
-// After successful login (before redirection)
-const getUserData = async (userEmail) => {
-  return await getOrCreateUserAccount(userEmail);
-};
+import { getUserData } from "../accountInfo/accountInfoService";
 
 // handleLogin is responsible for redirecting the user to the Auth0 login page
 const loginHandler = (req, res) => {
