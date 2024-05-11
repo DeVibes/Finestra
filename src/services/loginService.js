@@ -1,5 +1,5 @@
 import { handleCallback, handleLogin } from "@auth0/nextjs-auth0";
-import { getUserData } from "../accountInfo/accountInfoService";
+import { getUserData } from "./accountInfoService";
 
 // handleLogin is responsible for redirecting the user to the Auth0 login page
 const loginHandler = (req, res) => {
