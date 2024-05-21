@@ -1,7 +1,7 @@
 import { getOrCreateUserAccount } from "../db/prismaQueries";
 
-const getUserData = async (userEmail) => {
+const getAccountByUser = async (userEmail) => {
   return await getOrCreateUserAccount(userEmail);
 };
 
-export { getUserData };
+export { getAccountByUser };

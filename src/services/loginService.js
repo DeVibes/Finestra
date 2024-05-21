@@ -1,11 +1,11 @@
 import { handleCallback, handleLogin } from "@auth0/nextjs-auth0";
-import { getUserData } from "./accountInfoService";
+import { getAccountByUser } from "./accountInfoService";
 
 // handleLogin is responsible for redirecting the user to the Auth0 login page
 const loginHandler = (req, res) => {
   try {
     return handleLogin(req, res, {
-      returnTo: "/account/settings",
+      returnTo: "/account/dashboard",
     });
   } catch (error) {
     console.error(error);
@@ -23,7 +23,8 @@ const callbackHandler = async (req, res) => {
     return handleCallback(req, res, {
       afterCallback: async (req, session, state) => {
         const { email: userEmail } = session?.user;
-        session.user.account = await getUserData(userEmail);
+        const userAccountData = await getAccountByUser(userEmail);
+        session.user.account = userAccountData;
         return session;
       },
     });

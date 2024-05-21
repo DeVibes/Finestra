@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 
-const useFinPathname = () => {
+const useClientFinPathname = () => {
   const pathname = usePathname();
   const parts = pathname.split("/");
   const lastPart = parts[parts.length - 1];
@@ -11,4 +11,4 @@ const useFinPathname = () => {
   return capitalizedLastPart;
 };
 
-export default useFinPathname;
+export default useClientFinPathname;
