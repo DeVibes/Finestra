@@ -1,12 +1,11 @@
 import useServerGetSessionData from "../../hooks/useServerGetSessionData";
 import { getAccountByUser } from "../../services/accountInfoService";
 
-const withServerFetchAccountData = WrappedComponent => {
-  return async (props) => {
+// make this not an arrow function
+export default function withServerFetchAccountData(WrappedComponent) {
+  return async function (props) {
     const { email } = await useServerGetSessionData();
     const userAccountData = await getAccountByUser(email);
     return <WrappedComponent {...props} accountData={userAccountData}/>;
   };
-};
-
-export default withServerFetchAccountData;
+}
