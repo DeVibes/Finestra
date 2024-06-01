@@ -13,6 +13,7 @@ export {
   MdOutlineShoppingCart as ShoppingIcon,
   MdOutlineAccountBalance as IncomeIcon,
   MdOutlineDeviceUnknown as DefaultCategoryIcon,
+  MdAdd as AddIcon,
 } from "react-icons/md";
 export { RiAccountCircleLine as NameIcon } from "react-icons/ri";
 export { SiZcash as FinestraIcon } from "react-icons/si";

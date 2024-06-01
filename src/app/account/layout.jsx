@@ -1,6 +1,6 @@
 import React from "react";
-import AppNavbar from "./AppNavbar";
-import AppHeader from "./AppHeader";
+import AppHeader from "./(components)/AppHeader";
+import AppNavbar from "./(components)/AppNavbar";
 
 const AppLayout = ({ children }) => {
   // Layout should have a infine scroll for the main content
@@ -8,7 +8,7 @@ const AppLayout = ({ children }) => {
   return (
     <div className="flex flex-col h-full">
       <AppHeader />
-      <main className="flex grow p-4 overflow-y-auto md:overflow-hidden">{children}</main>
+      <main className="flex grow p-6 overflow-y-auto lg:overflow-hidden">{children}</main>
       <footer className="md:hidden">
         <AppNavbar />
       </footer>

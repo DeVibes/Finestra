@@ -3,24 +3,18 @@ const TextInput = ({ field, ...props }) => {
     <div {...props}>
       <label
         htmlFor={field.id}
-        className="block text-lg text-catgreen font-bold p-2"
+        className="block text-md text-catgreen font-bold py-2"
       >
         {field.label}
       </label>
-      <div className="flex items-center gap-2 p-2 border border-cat_text_primary rounded-lg">
-        <span>
-          {field.Icon && (
-            <field.Icon size={25} className="text-cat_text_primary" />
-          )}
-        </span>
-        <input
-          type="text"
-          id={field.id}
-          className="w-full cursor-not-allowed text-lg text-cat_text_primary bg-transparent"
-          disabled
-          value={field.value}
-        />
-      </div>
+      <input
+        type="text"
+        name={field.id}
+        id={field.id}
+        className="w-full p-2 border border-cat_text_primary rounded-lg text-lg text-cat_text_primary bg-transparent focus:ring-blue-500 focus:border-blue-500"
+        disabled={field.disabled || false}
+        value={field.value}
+      />
     </div>
   );
 };

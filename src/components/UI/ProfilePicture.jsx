@@ -3,7 +3,6 @@ import { useSpring, animated } from "@react-spring/web";
 
 const ProfilePicture = ({ config }) => {
   const { isShown, size, isLoading, url } = config;
-  console.log("url", url)
 
   const springStyle = useSpring({
     from: { opacity: 1 },
@@ -11,7 +10,7 @@ const ProfilePicture = ({ config }) => {
   });
 
   return (
-    <>
+    <div className="flex justify-center">
       {/* {!isLoading && ( */}
       <animated.img
         src={url}
@@ -22,7 +21,7 @@ const ProfilePicture = ({ config }) => {
         height={size}
       />
       {/* )} */}
-    </>
+    </div>
   );
 };
 export default ProfilePicture;

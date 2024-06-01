@@ -1,34 +1,25 @@
-import CategoryCard from "../../../components/UI/CategoryCard";
-import ProfilePicture from "../../../components/UI/ProfilePicture";
-import useServerAccountData from "../../../hooks/useServerAccountData";
+import PropTypes from "prop-types";
+import withServerAccountCheck from "../../hoc/withServerAccountCheck";
 import CategorySlider from "./(sections)/CategorySlider";
-import PersonalInfo from "./(sections)/PersonalInfo";
+import BasicInfo from "./(sections)/BasicInfo";
+import PaymentTypeSlider from "./(sections)/PaymentTypeSlider";
+import useServerGetSessionData from "../../../hooks/useServerGetSessionData";
 
-const PrefenrencesPage = async () => {
-  const { userData, accountData } = await useServerAccountData();
-  const profileData = {
-    fullName: `${userData.firstName} ${userData.lastName}`,
-    email: userData.email,
-    accountName: accountData.name,
-    accountOwner: accountData.owner,
-  };
-  const profilePicConfig = {
-    isShown: true,
-    size: 150,
-    isLoading: !userData.profilePic,
-    url: userData.profilePic,
+const PreferencesPage = async ({ accountData }) => {
+  const { fullName, email, profilePic } = await useServerGetSessionData();
+  const basicInfoData = {
+    email,
+    accountName: accountData?.name,
+    accountOwner: accountData?.admin,
+    profilePic,
+    fullName
   };
 
   return (
-    <div className="w-full">
-      <div className="flex justify-center my-4">
-        <ProfilePicture config={profilePicConfig} />
-      </div>
-      <span className="block text-center text-xl mb-4">
-        {profileData?.fullName}
-      </span>
-      <PersonalInfo data={profileData} />
-      <CategorySlider categories={accountData?.categories} className="mb-4"/>
+    <div className="w-full flex flex-col lg:items-center">
+      <BasicInfo data={basicInfoData} className="mb-4 lg:w-2/3"/>
+      <CategorySlider categories={accountData?.categories} className="mb-4 lg:w-2/3"/>
+      <PaymentTypeSlider paymentTypes={accountData?.paymentTypes} className="mb-4 lg:w-2/3" />
       <section className="flex justify-end">
         <button className="p-2 bg-catgreen text-white rounded-lg">
           <a href="/api/auth/logout">logout</a>
@@ -38,4 +29,19 @@ const PrefenrencesPage = async () => {
   );
 };
 
-export default PrefenrencesPage;
+PreferencesPage.propTypes = {
+  accountData: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    admin: PropTypes.string,
+    monthCycle: PropTypes.number,
+    users: PropTypes.arrayOf(PropTypes.string),
+    paymentTypes: PropTypes.arrayOf(PropTypes.string),
+    categories: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      displayName: PropTypes.string,
+    }))
+  }),
+}
+
+export default withServerAccountCheck(PreferencesPage);

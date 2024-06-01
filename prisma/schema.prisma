@@ -23,7 +23,7 @@ model FinestraAccount {
   admin      String
   users      String[]
   categories Category[]
-  paymentTypes PaymentType[]
+  paymentTypes String[]
   monthCycle Int
 }
 

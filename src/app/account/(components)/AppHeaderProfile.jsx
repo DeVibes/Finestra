@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import useClientFinPathname from "../../hooks/useClientFinPathname";
-import ProfilePicture from "../../components/UI/ProfilePicture";
+import useClientFinPathname from "../../../hooks/useClientFinPathname";
+import ProfilePicture from "../../../components/UI/ProfilePicture";
 
 const AppHeaderProfile = ({ url, className }) => {
   const [isShown, setIsShown] = useState(true);

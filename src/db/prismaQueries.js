@@ -6,7 +6,6 @@ const getOrCreateUserAccount = async (userEmail) => {
     const accounts = await myDbInstance.finestraAccount.findMany();
     const account = accounts.find((acc) => acc.users.includes(userEmail));
     if (account) {
-      console.debug("Account found!", account);
       return account;
     }
     const newAccount = await myDbInstance.finestraAccount.create({
@@ -56,7 +55,28 @@ const createTransaction = async (transaction) => {
   }
 };
 
+const addPaymentTypeToAccount = async (paymentType, accountId) => {
+  try {
+    const updatedAccount = await myDbInstance.finestraAccount.update({
+      where: {
+        id: accountId,
+      },
+      data: {
+        paymentTypes: {
+          push: paymentType,
+        },
+      },
+    });
+    return updatedAccount;
+  } catch (error) {
+    console.error("Failed to add payment type", error);
+    return null;
+  }
+
+}
+
 export {
+  addPaymentTypeToAccount,
   getOrCreateUserAccount,
   getTransactionsByAccountId,
   createTransaction,

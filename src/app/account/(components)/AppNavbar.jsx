@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { DashboardIcon, SettingsIcon, TransactionsIcon } from "../../utils/icons";
+import { DashboardIcon, SettingsIcon, TransactionsIcon } from "../../../utils/icons";
 
 const AppNavbar = ({ className, ...props }) => {
   const linkObjects = [

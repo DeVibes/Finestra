@@ -1,7 +1,13 @@
-import { getOrCreateUserAccount } from "../db/prismaQueries";
+import { addPaymentTypeToAccount, getOrCreateUserAccount } from "../db/prismaQueries";
 
 const getAccountByUser = async (userEmail) => {
-  return await getOrCreateUserAccount(userEmail);
+  const accountData = await getOrCreateUserAccount(userEmail);
+  return accountData;
 };
 
-export { getAccountByUser };
+const addPaymentType = async (paymentType, accountId) => {
+  const result = await addPaymentTypeToAccount(paymentType, accountId);
+  return result;
+}
+
+export { getAccountByUser, addPaymentType };
