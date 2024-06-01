@@ -9,4 +9,5 @@ const withServerFetchAccountData = WrappedComponent => {
   };
 };
 
+withServerFetchAccountData.DisplayName = "withServerFetchAccountData";
 export default withServerFetchAccountData;
