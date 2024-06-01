@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import withServerAccountCheck from "../../hoc/withServerAccountCheck";
+import withServerFetchAccountData from "../../hoc/withServerFetchAccountData";
 import CategorySlider from "./(sections)/CategorySlider";
 import BasicInfo from "./(sections)/BasicInfo";
 import PaymentTypeSlider from "./(sections)/PaymentTypeSlider";
@@ -44,4 +44,4 @@ PreferencesPage.propTypes = {
   }),
 }
 
-export default withServerAccountCheck(PreferencesPage);
+export default withServerFetchAccountData(PreferencesPage);
