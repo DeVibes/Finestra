@@ -1,10 +1,11 @@
-// import { useState } from "react";
+'use client';
+import { useState } from "react";
 import PaymentTypeCard from "../../../../components/UI/PaymentTypeCard";
 import SliderAddButton from "../../../../components/UI/SliderAddButton";
-// import AddPaymentForm from "./AddPaymentForm";
+import AddPaymentForm from "./AddPaymentForm";
 
 const PaymentTypeSlider = ({ paymentTypes, className }) => {
-  // const [showAddPaymentType, setShowAddPaymentType] = useState(false);
+  const [showAddPaymentType, setShowAddPaymentType] = useState(false);
   const handleAddClick = () => {
     setShowAddPaymentType(!showAddPaymentType);
   }
@@ -12,9 +13,9 @@ const PaymentTypeSlider = ({ paymentTypes, className }) => {
     <section className={`${className}`}>
       <div className="flex justify-between">
         <h1 className="text-catmauve text-xl mb-1">Account Payment Types</h1>
-        {/* <SliderAddButton onClick={handleAddClick} /> */}
+        <SliderAddButton onClick={handleAddClick} />
       </div>
-      {/* <AddPaymentForm isShown={showAddPaymentType} /> */}
+      <AddPaymentForm isShown={showAddPaymentType} className="mb-2"/>
       <div className="flex gap-3 py-2 overflow-auto">
         {paymentTypes && paymentTypes.map((pt) => (
           <PaymentTypeCard key={pt} name={pt} />

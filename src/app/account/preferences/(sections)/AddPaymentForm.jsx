@@ -1,32 +1,44 @@
-// 'use client'
-import addPaymentType from "../../../../actions/account";
+'use client'
 import TextInput from "../../../../components/UI/TextInput";
 import { useSpring, animated, config } from "@react-spring/web";
-import { useFormStatus, useFormState } from 'react-dom'
-import { useActionState } from 'react'
-const AddPaymentForm = ({ isShown }) => {
-    // const addWithAccountId = addPaymentType.bind(null, 'myAccountId')
-    // const [state, submitAction, isPending] = useActionState(addPaymentType, {error: null});
-    const { pending } = useFormStatus()
-    const [state, formAction] = useFormState(addPaymentType, { paymentType: '', accountId: 'myjaccountId'})
+import { addPaymentTypeAction } from "../../../actions/account";
+import { CheckMarkIcon } from "../../../../utils/icons";
+import { useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
+const AddPaymentForm = ({ isShown, className }) => {
+    const [isSaveShown, setIsSaveShown] = useState(false);
+    const [formState, formAction] = useFormState(addPaymentTypeAction, {})
     const field = {
-        label: "Add Payment Type",
+        label: "Payment Type",
         id: "paymentType",
     };
+    const handleInputChange = () => setIsSaveShown(true);
     const styles = useSpring({
         config: config.stiff,
         from: { opacity: 0, height: 0 },
         to: { opacity: isShown ? 1 : 0, height: isShown ? 'auto' : 0 },
     });
     return (
-        <animated.div style={styles} className="mb-2">
-            <form action={formAction} className="">
-                <TextInput field={field}  />
-                <button type="submit" className="p-2 bg-catgreen text-white rounded-lg" disabled={pending}>Add</button>
-                {/* {state.error && <span className="text-red-500">{state.error}</span>} */}
+        <animated.div style={styles} className={`${className}`}>
+            <form className="flex w-full" action={formAction}>
+                <input type="hidden" name="accountId" value="1" />
+                <TextInput config={field} onChange={handleInputChange} />
+                {isSaveShown &&
+                    <SubmitButton />}
+                {/* {pending && <span className="text-catgreen">Saving...</span>} */}
             </form>
+            {!formState.success && <span className="text-red-500">{formState.payload}</span>}
         </animated.div>
     );
 }
 
 export default AddPaymentForm;
+
+const SubmitButton = () => {
+    const { pending } = useFormStatus();
+    return (
+        <button type="submit" className="p-1 bg-catgreen text-white text-xl rounded-lg" disabled>
+            <CheckMarkIcon size={15} />
+        </button>
+    );
+}

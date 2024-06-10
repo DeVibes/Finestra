@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import withServerFetchAccountData from "../../hoc/withServerFetchAccountData";
 import CategorySlider from "./(sections)/CategorySlider";
 import BasicInfo from "./(sections)/BasicInfo";
 import PaymentTypeSlider from "./(sections)/PaymentTypeSlider";
 import useServerGetSessionData from "../../../hooks/useServerGetSessionData";
+import withServerFetchAccountData from "../../../hoc/withServerFetchAccountData";
 
 const PreferencesPage = async ({ accountData }) => {
   const { fullName, email, profilePic } = await useServerGetSessionData();

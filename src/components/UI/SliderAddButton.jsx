@@ -3,8 +3,9 @@ import { AddIcon } from "../../utils/icons";
 
 const SliderAddButton = ({ onClick }) => {
     return (
-        <button className="border border-catmauve rounded-lg px-4" onClick={onClick}>
-            <AddIcon size={25} className="text-catmauve" />
+        <button className="flex justify-between items-center gap-1" onClick={onClick}>
+            <AddIcon size={20} className="text-catgreen" />
+            <span className="text-catgreen text-lg">Add Payment Type</span>
         </button>
     );
 }

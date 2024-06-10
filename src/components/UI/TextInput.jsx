@@ -1,4 +1,40 @@
-const TextInput = ({ field, ...props }) => {
+import PropTypes from "prop-types";
+import {  DefaultCategoryIcon } from "../../utils/icons";
+
+const TextInput = ({ config, className, ...props }) => {
+  const { id, label, disabled, value, icon: Icon = DefaultCategoryIcon } = config;
+  return (
+    <div className={`${className} flex items-center gap-2 w-full`}>
+      <div className="w-1/2 flex items-center gap-2">
+        <Icon size={20} className="text-catgreen"/>
+        <span className="text-md text-cat_text_primary">{label}</span>
+      </div>
+      <input
+        type="text"
+        name={id}
+        id={id}
+        className="w-full text-md text-cat_text_primary bg-transparent px-2 focus:outline-none"
+        disabled={disabled || false}
+        value={value}
+        {...props}
+      />
+    </div>
+  );
+};
+
+TextInput.propTypes = {
+  config: PropTypes.shape({
+    id: PropTypes.string,
+    label: PropTypes.string,
+    disabled: PropTypes.bool,
+    value: PropTypes.string,
+    icon: PropTypes.element,
+  }),
+};
+
+export default TextInput;
+
+const TextInput3 = ({ field, ...props }) => {
   return (
     <div {...props}>
       <label
@@ -39,4 +75,3 @@ const TextInput2 = ({ field, className, ...props }) => {
   );
 };
 
-export default TextInput;

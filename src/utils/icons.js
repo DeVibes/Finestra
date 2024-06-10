@@ -4,6 +4,7 @@ export {
   MdArrowBackIos as BackIcon,
   MdOutlineAlternateEmail as EmailIcon,
   MdDriveFileRenameOutline as AccountNameIcon,
+  MdSupervisorAccount as AccountOwnerIcon,
   MdOutlineLocalGroceryStore as GroceriesIcon,
   MdOutlineHomeRepairService as ServicesIcon,
   MdOutlineLocalConvenienceStore as UtilitiesIcon,
@@ -14,6 +15,7 @@ export {
   MdOutlineAccountBalance as IncomeIcon,
   MdOutlineDeviceUnknown as DefaultCategoryIcon,
   MdAdd as AddIcon,
+  MdOutlineCheck as CheckMarkIcon,
 } from "react-icons/md";
 export { RiAccountCircleLine as NameIcon } from "react-icons/ri";
 export { SiZcash as FinestraIcon } from "react-icons/si";
