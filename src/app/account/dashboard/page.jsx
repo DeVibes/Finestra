@@ -1,9 +1,12 @@
-const DashboardPage = () => {
+import withServerFetchAccountData from "../../../hoc/withServerFetchAccountData";
+import RecentTransactions from "./(components)/RecentTransactions";
+
+const DashboardPage = ({ accountData }) => {
   return (
-    <>
-    <div>Hello from dashboard!</div>
-    </>
+    <section className="w-full">
+      <RecentTransactions accountId={accountData?.id}/>
+    </section>
   )
 }
 
-export default DashboardPage;
+export default withServerFetchAccountData(DashboardPage);

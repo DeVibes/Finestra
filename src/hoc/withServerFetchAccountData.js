@@ -7,9 +7,14 @@ export default function withServerFetchAccountData(WrappedComponent) {
     const { email } = await useServerGetSessionData();
     const userAccountData = await getAccountByUser(email);
     if (!userAccountData) {
-      console.error('No account data found for user: ', email)
-      redirect('/')
+      console.error("No account data found for user: ", email);
+      redirect("/");
     }
-    return <WrappedComponent {...props} accountData={userAccountData} />;
+    return (
+      <WrappedComponent
+        {...props}
+        accountData={{ ...userAccountData, currentUser: email }}
+      />
+    );
   };
 }

@@ -15,8 +15,13 @@ export {
   MdOutlineAccountBalance as IncomeIcon,
   MdOutlineDeviceUnknown as DefaultCategoryIcon,
   MdAdd as AddIcon,
+  MdOutlineDescription as DescriptionIcon,
   MdOutlineCheck as CheckMarkIcon,
+  MdOutlineDateRange as DateIcon,
+  MdOutlinePayment as PaymentIcon,
+  MdCategory as CategoryIcon,
 } from "react-icons/md";
 export { RiAccountCircleLine as NameIcon } from "react-icons/ri";
 export { SiZcash as FinestraIcon } from "react-icons/si";
 export { LuArrowDownUp as TransactionsIcon } from "react-icons/lu";
+export { IoIosPricetag as PriceTagIcon } from "react-icons/io";

@@ -30,10 +30,11 @@ model FinestraAccount {
 model Transaction {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   price       Float
-  date        DateTime
+  billingDate DateTime
+  createdAt   DateTime  @default(now())
   description String
   category    Category 
-  account     String
-  useremail   String
+  accountId   String
+  userId      String
   paymentType String
 }
