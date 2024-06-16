@@ -6,9 +6,11 @@ import {
   addTransaction as addTransactionQuery,
 } from "../../db/queries/transactions";
 import { redirect } from "next/navigation";
+import getCategoryIcon from "../../utils/catIconMatcher";
 
 export const getTransactions = async (accountId) => {
-  const transactions = await getTransactionsByAccountId(accountId);
+  let transactions = await getTransactionsByAccountId(accountId)
+  console.log("transactions", transactions)
   return transactions;
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // return [

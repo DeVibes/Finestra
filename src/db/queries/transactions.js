@@ -2,7 +2,7 @@ import myDbInstance from "..";
 
 export const getTransactionsByAccountId = async (accountId) => {
   try {
-    const transactions = await myDbInstance.finestraTransaction.findMany({
+    let transactions = await myDbInstance.finestraTransaction.findMany({
       where: {
         accountId,
       },

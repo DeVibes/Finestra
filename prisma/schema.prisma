@@ -18,24 +18,25 @@ type PaymentType {
 }
 
 model FinestraAccount {
-  id         String     @id @default(auto()) @map("_id") @db.ObjectId
-  name       String     @unique
-  admin      String
-  users      String[]
-  categories Category[]
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  name         String        @unique
+  admin        String
+  users        String[]
+  categories   Category[]
   paymentTypes PaymentType[]
-  monthCycle Int
+  monthCycle   Int
 }
 
 model FinestraTransaction {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   price       Float
   billingDate String
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime @default(now())
   description String
   store       String
-  category    String 
+  category    String
   accountId   String
   userId      String
   paymentType String
+  income      Boolean  @default(false)
 }

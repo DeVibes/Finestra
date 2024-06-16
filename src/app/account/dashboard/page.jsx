@@ -6,10 +6,14 @@ const DashboardPage = ({ accountData }) => {
   return (
     <>
       <section className="w-full">
-        <ModulePlaceholder />
+        <div className="lg:w-1/2">
+          <ModulePlaceholder />
+        </div>
       </section>
       <section className="w-full">
-        <RecentTransactions accountId={accountData?.id} />
+        <div className="lg:w-1/2">
+          <RecentTransactions accountId={accountData?.id} />
+        </div>
       </section>
     </>
   )
