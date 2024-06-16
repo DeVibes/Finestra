@@ -1,5 +1,5 @@
 import Image from "next/image";
-import FinButton from "../components/FinButton";
+import FinButton from "../components/UI/FinButton";
 
 const WelcomePage = () => {
   const centerElementStyle =

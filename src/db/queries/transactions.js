@@ -1,8 +1,8 @@
-import myDbInstance from "../";
+import myDbInstance from "..";
 
 export const getTransactionsByAccountId = async (accountId) => {
   try {
-    const transactions = await myDbInstance.finestraTransactions.findMany({
+    const transactions = await myDbInstance.finestraTransaction.findMany({
       where: {
         accountId,
       },
@@ -16,12 +16,13 @@ export const getTransactionsByAccountId = async (accountId) => {
 
 export const addTransaction = async (transaction) => {
   try {
-    const newTransaction = await myDbInstance.finestraTransactions.create({
+    const newTransaction = await myDbInstance.finestraTransaction.create({
       data: transaction,
     });
     return newTransaction;
   } catch (error) {
     console.error("Failed to add transaction", error);
+    // console.log(JSON.stringify(error.name))
     return null;
   }
 };

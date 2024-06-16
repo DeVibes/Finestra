@@ -23,17 +23,18 @@ model FinestraAccount {
   admin      String
   users      String[]
   categories Category[]
-  paymentTypes String[]
+  paymentTypes PaymentType[]
   monthCycle Int
 }
 
-model Transaction {
+model FinestraTransaction {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   price       Float
-  billingDate DateTime
+  billingDate String
   createdAt   DateTime  @default(now())
   description String
-  category    Category 
+  store       String
+  category    String 
   accountId   String
   userId      String
   paymentType String

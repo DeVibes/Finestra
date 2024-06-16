@@ -12,8 +12,9 @@ const TransactionItem = ({ transaction }) => {
         <span className="block text-cat_text_primary text-md">{transaction.store}</span>
         <span className="block text-cat_title_bg text-md">{transaction.description}</span>
       </div>
-      <div className="flex items-center">
+      <div className="flex flex-col items-center">
         <span className="text-catgreen">{transaction.price} ₪</span>
+        <span className="text-cat_title_bg text-sm">{transaction.paymentType}</span>
       </div>
     </div>
   );

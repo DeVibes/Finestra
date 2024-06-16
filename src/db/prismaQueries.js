@@ -45,7 +45,7 @@ const getTransactionsByAccountId = async (accountId) => {
 
 const createTransaction = async (transaction) => {
   try {
-    const newTransaction = await myDbInstance.finestraTransaction.create({
+    const newTransaction = await myDbInstance.finestraTransactions.create({
       data: transaction,
     });
     return newTransaction;
@@ -72,7 +72,6 @@ const addPaymentTypeToAccount = async (paymentType, accountId) => {
     console.error("Failed to add payment type", error);
     return null;
   }
-
 }
 
 export {
