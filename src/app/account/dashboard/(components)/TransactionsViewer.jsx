@@ -6,7 +6,7 @@ import AnimatedTransactionList from "./AnimatedTransactionsList";
 const TransactionsViewer = async ({ accountId }) => {
   const transactions = await getTransactions(accountId);
   return (
-    <div className="flex flex-col gap-2" id="transactions_viewer">
+    <div className="max-h-80 overflow-y-auto" id="transactions_viewer">
       {transactions?.length > 0 && (
         <AnimatedTransactionList items={transactions} />
       )}

@@ -10,7 +10,7 @@ import getCategoryIcon from "../../utils/catIconMatcher";
 
 export const getTransactions = async (accountId) => {
   let transactions = await getTransactionsByAccountId(accountId)
-  console.log("transactions", transactions)
+  transactions = sortTransactionsByIssuedAtDESC(transactions)
   return transactions;
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // return [
@@ -36,6 +36,7 @@ export const getTransactions = async (accountId) => {
 export const addTransaction = async (accountId, userId, formData) => {
   //!TODO toggle payload is not working properly
   // income toggle off -> null, income toggle on -> ""
+  // const issuedAtUtc = new Date(formData.get("issuedAt")).toISOString().slice(0, 16)
   const newTransaction = {
     income: formData.get("income") === "" ? true : false,
     description: formData.get("description"),
@@ -44,6 +45,7 @@ export const addTransaction = async (accountId, userId, formData) => {
     category: formData.get("category"),
     paymentType: formData.get("paymentType"),
     billingDate: formData.get("billingDate"),
+    issuedAt: formData.get("issuedAt"),
     accountId: accountId,
     userId: userId,
   };
@@ -53,3 +55,9 @@ export const addTransaction = async (accountId, userId, formData) => {
   redirect("/account/dashboard");
   return createdTransaction;
 };
+
+const sortTransactionsByIssuedAtDESC = (transactions) => {
+  return transactions.sort((a, b) => {
+    return new Date(b.issuedAt.slice(0, 16)) - new Date(a.issuedAt.slice(0, 16));
+  });
+}

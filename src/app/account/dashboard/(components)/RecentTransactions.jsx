@@ -10,6 +10,7 @@ const RecentTransactions = async ({ accountId }) => {
       <Suspense fallback={<ListPlaceholder />}>
         <TransactionsViewer accountId={accountId} />
       </Suspense>
+      {/* <ListPlaceholder /> */}
     </>
   );
 };

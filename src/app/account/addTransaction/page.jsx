@@ -25,13 +25,11 @@ const AddTransactionPage = ({ accountData }) => {
         <FinInput
           icon={DescriptionIcon}
           label="Description"
-          // className="w-full"
           name="description"
         />
         <FinInput
           icon={StoreIcon}
           label="Store"
-          // className="w-full"
           name="store"
         />
         <FinInput
@@ -42,8 +40,14 @@ const AddTransactionPage = ({ accountData }) => {
         />
         <FinInput
           icon={DateIcon}
+          label="Issued At"
+          type="datetime-local"
+          name="issuedAt"
+        />
+        <FinInput
+          icon={DateIcon}
           label="Billing Date"
-          type="date"
+          type="month"
           name="billingDate"
         />
         <FinSelect
@@ -51,14 +55,12 @@ const AddTransactionPage = ({ accountData }) => {
           icon={PaymentIcon}
           label="Payment Type"
           name="paymentType"
-        // className="w-full mb-2"
         />
         <FinSelect
           items={accountData.categories}
           icon={CategoryIcon}
           label="Category"
           name="category"
-        // className="w-full mb-2"
         />
         <FinToggle icon={IncomeIcon} label="Income" name="income" className="w-full mb-2" />
         <div className="w-full flex justify-end">

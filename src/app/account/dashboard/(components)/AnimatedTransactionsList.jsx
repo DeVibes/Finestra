@@ -10,7 +10,7 @@ const AnimatedTransactionList = ({ items, itemComponent: ItemComp }) => {
     leave: { opacity: 0, transform: "translate3d(0,-40px,0)" },
   });
   return (
-    <div className="mt-2 flex flex-col gap-2" id="transactions_viewer">
+    <div className="flex flex-col gap-2">
       {items.length > 0 &&
         transition((style, item) => (
           <animated.div style={style}>
