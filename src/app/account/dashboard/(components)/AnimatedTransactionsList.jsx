@@ -1,9 +1,13 @@
-'use client';
+"use client";
 import { useTransition, animated } from "@react-spring/web";
 import TransactionItem from "./TransactionItem";
 
-const AnimatedTransactionList = ({ items, itemComponent: ItemComp }) => {
-  const transition = useTransition(items, {
+const AnimatedTransactionList = ({
+  transactions,
+  selectedTransactionId,
+  handleTransactionClick,
+}) => {
+  const transition = useTransition(transactions, {
     trail: 100,
     from: { opacity: 0, transform: "translate3d(0,-40px,0)" },
     enter: { opacity: 1, transform: "translate3d(0,0px,0)" },
@@ -11,10 +15,14 @@ const AnimatedTransactionList = ({ items, itemComponent: ItemComp }) => {
   });
   return (
     <div className="flex flex-col gap-2">
-      {items.length > 0 &&
+      {transactions.length > 0 &&
         transition((style, item) => (
           <animated.div style={style}>
-            <TransactionItem transaction={item} />
+            <TransactionItem
+              transaction={item}
+              handleTransactionClick={handleTransactionClick}
+              isSelected={selectedTransactionId === item.id}
+            />
           </animated.div>
         ))}
     </div>

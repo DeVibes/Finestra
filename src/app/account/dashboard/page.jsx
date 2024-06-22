@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import ModulePlaceholder from "../../../components/placeholders/ModulePlaceholder";
 import withServerFetchAccountData from "../../../hoc/withServerFetchAccountData";
-import RecentTransactions from "./(components)/RecentTransactions";
+import RecentTransactionsModule from "./(components)/RecentTransactionsModule";
+import ListPlaceholder from "../../../components/placeholders/ListPlaceholder";
 
 const DashboardPage = ({ accountData }) => {
   return (
@@ -9,10 +11,12 @@ const DashboardPage = ({ accountData }) => {
         <ModulePlaceholder />
       </section>
       <section className="w-full lg:w-2/3 h-1/2 flex-initial">
-        <RecentTransactions accountId={accountData?.id} />
+        <Suspense fallback={<ListPlaceholder />}>
+          <RecentTransactionsModule accountId={accountData?.id} />
+        </Suspense>
       </section>
     </>
-  )
-}
+  );
+};
 
 export default withServerFetchAccountData(DashboardPage);

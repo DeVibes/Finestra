@@ -13,6 +13,7 @@ const config = {
       },
       colors: {
         catgreen: "#a6da95",
+        catyellow: "#eed49f",
         catred: "#ed8796",
         catmauve: "#c6a0f6",
         catsub1: "#a5adcb",

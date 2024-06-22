@@ -40,4 +40,5 @@ model FinestraTransaction {
   userId      String
   paymentType String
   income      Boolean  @default(false)
+  verified    Boolean  @default(false)
 }

@@ -6,11 +6,10 @@ import {
   addTransaction as addTransactionQuery,
 } from "../../db/queries/transactions";
 import { redirect } from "next/navigation";
-import getCategoryIcon from "../../utils/catIconMatcher";
 
 export const getTransactions = async (accountId) => {
-  let transactions = await getTransactionsByAccountId(accountId)
-  transactions = sortTransactionsByIssuedAtDESC(transactions)
+  let transactions = await getTransactionsByAccountId(accountId);
+  transactions = sortTransactionsByIssuedAtDESC(transactions);
   return transactions;
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // return [
@@ -51,13 +50,15 @@ export const addTransaction = async (accountId, userId, formData) => {
   };
   const createdTransaction = await addTransactionQuery(newTransaction);
   //!TODO Error handling
-  revalidatePath("/account/dashboard")
+  revalidatePath("/account/dashboard");
   redirect("/account/dashboard");
   return createdTransaction;
 };
 
 const sortTransactionsByIssuedAtDESC = (transactions) => {
   return transactions.sort((a, b) => {
-    return new Date(b.issuedAt.slice(0, 16)) - new Date(a.issuedAt.slice(0, 16));
+    return (
+      new Date(b.issuedAt.slice(0, 16)) - new Date(a.issuedAt.slice(0, 16))
+    );
   });
-}
+};
