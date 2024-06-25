@@ -74,9 +74,27 @@ const addPaymentTypeToAccount = async (paymentType, accountId) => {
   }
 }
 
+const editVerifyTransaction = async (transactionId, verified) => {
+  try {
+    const updatedTransaction = await myDbInstance.finestraTransaction.update({
+      where: {
+        id: transactionId,
+      },
+      data: {
+        verified,
+      },
+    });
+    return updatedTransaction;
+  } catch (error) {
+    console.error("Failed to edit transaction", error);
+    return null;
+  }
+}
+
 export {
   addPaymentTypeToAccount,
   getOrCreateUserAccount,
   getTransactionsByAccountId,
   createTransaction,
+  editVerifyTransaction
 };

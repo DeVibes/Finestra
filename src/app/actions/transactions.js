@@ -6,11 +6,15 @@ import {
   addTransaction as addTransactionQuery,
 } from "../../db/queries/transactions";
 import { redirect } from "next/navigation";
+import { editVerifyTransaction } from "../../db/prismaQueries";
 
 export const getTransactions = async (accountId) => {
-  let transactions = await getTransactionsByAccountId(accountId);
-  transactions = sortTransactionsByIssuedAtDESC(transactions);
-  return transactions;
+  const transactions = await getTransactionsByAccountId(accountId);
+  const sortedTransactions = sortTransactionsByIssuedAtDESC(transactions)
+  // return sortedTransactions;
+  const transactionsWithDateFlag = addDateTitleFlag(sortedTransactions)
+  console.log(transactionsWithDateFlag)
+  return transactionsWithDateFlag;
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // return [
   //   {
@@ -55,6 +59,14 @@ export const addTransaction = async (accountId, userId, formData) => {
   return createdTransaction;
 };
 
+export const editVerifyStatus = async (transactionId, verified) => {
+  console.log(transactionId, verified);
+  //!TODO Error handling
+  const updatedTransaction = await editVerifyTransaction(transactionId, verified);
+  revalidatePath("/account/dashboard");
+  redirect("/account/dashboard");
+}
+
 const sortTransactionsByIssuedAtDESC = (transactions) => {
   return transactions.sort((a, b) => {
     return (
@@ -62,3 +74,20 @@ const sortTransactionsByIssuedAtDESC = (transactions) => {
     );
   });
 };
+
+const addDateTitleFlag = (transactions) => {
+  if (transactions.length === 0) {
+    return transactions;
+  }
+  let dateFlag = null;
+  transactions.forEach(transaction => {
+    const shouldTransactionBeFlagged = transaction.issuedAt.slice(0, 10) !== dateFlag;
+    if (shouldTransactionBeFlagged) {
+      transaction.isFirstTransaction = true;
+      dateFlag = transaction.issuedAt.slice(0, 10);
+    }
+    else
+      transaction.isFirstTransaction = false;
+  });
+  return transactions;
+}

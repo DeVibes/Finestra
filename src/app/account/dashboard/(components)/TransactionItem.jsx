@@ -1,39 +1,49 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import getCategoryIcon from "../../../../utils/catIconMatcher";
+import { editVerifyStatus } from "../../../actions/transactions";
+import { DateTime } from 'luxon';
 
 const TransactionItem = ({
   transaction,
-  isSelected,
-  handleTransactionClick,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  // const [result, action, pending] = useActionState(editVerifyStatus)
+  const verifyTransaction = async () => {
+    setIsLoading(true);
+    await editVerifyStatus(transaction.id, !transaction.verified);
+  }
   const Icon = getCategoryIcon(transaction.category);
   return (
     <>
+      {transaction.isFirstTransaction && (<div className="text-cat_text_primary mb-1 text-sm font-medium mt-2">{DateTime.fromISO(transaction.issuedAt).toLocaleString(DateTime.DATE_HUGE)}</div>)}
       <div
-        className={`flex gap-3 ${isSelected && "border border-catmauve rounded-lg"}`}
+        className="flex gap-2"
         id="transaction_item"
-        onClick={() => handleTransactionClick(transaction.id)}
       >
         <div className="">
           <Icon size={45} className="p-2 rounded-lg bg-cat_text_bg" />
         </div>
-        <div className="grow">
+        <div className="w-1/2">
           <span className="block text-cat_text_primary text-md">
             {transaction.store}
           </span>
-          <span className="block text-cat_title_bg text-md">
+          <span className="block text-cat_title_bg text-sm">
             {transaction.description}
           </span>
         </div>
-        <div className="flex justify-center items-center">
-          {transaction.verified && (
-            <span className="text-catmauve border border-catmauve text-sm font-medium me-2 px-2.5 py-0.5 rounded">
-              Verified
+        <div className="w-1/5 flex-none flex justify-center items-center">
+          {isLoading ? (
+            <span className="text-center border w-full cursor-wait text-sm font-medium me-2 px-2.5 py-0.5 rounded">
+              Loading
+            </span>
+          ) : (
+            <span className={`text-center border w-full cursor-pointer text-sm font-medium me-2 px-2.5 py-0.5 rounded ${transaction.verified ? "text-catmauve border-catmauve" : "text-catyellow border-catyellow"}`} onClick={verifyTransaction}>
+              {transaction.verified ? "Verified" : "Unverified"}
             </span>
           )}
         </div>
-        <div className="flex flex-col items-end">
+        <div className="grow flex flex-col items-end">
           {transaction.income ? (
             <span className="text-catgreen">{transaction.price} ₪</span>
           ) : (
@@ -44,12 +54,6 @@ const TransactionItem = ({
           </span>
         </div>
       </div>
-      {isSelected && (
-        <div className="flex" id="transaction_buttons">
-          <button className="btn bg-catyellow rounded-lg py-1 px-3">Edit</button>
-          <button className="btn btn-catred">Delete</button>
-        </div>
-      )}
     </>
   );
 };
