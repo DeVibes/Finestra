@@ -11,9 +11,7 @@ import { editVerifyTransaction } from "../../db/prismaQueries";
 export const getTransactions = async (accountId) => {
   const transactions = await getTransactionsByAccountId(accountId);
   const sortedTransactions = sortTransactionsByIssuedAtDESC(transactions)
-  // return sortedTransactions;
   const transactionsWithDateFlag = addDateTitleFlag(sortedTransactions)
-  console.log(transactionsWithDateFlag)
   return transactionsWithDateFlag;
   // await new Promise((resolve) => setTimeout(resolve, 10000));
   // return [
@@ -60,7 +58,6 @@ export const addTransaction = async (accountId, userId, formData) => {
 };
 
 export const editVerifyStatus = async (transactionId, verified) => {
-  console.log(transactionId, verified);
   //!TODO Error handling
   const updatedTransaction = await editVerifyTransaction(transactionId, verified);
   revalidatePath("/account/dashboard");
